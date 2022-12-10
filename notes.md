@@ -192,3 +192,35 @@ y = x.dot(W)
 print("y:\n", y)
 ```
 
+## Artificial Neuron Network
+
+Stopping Rules
+- maximum epochs
+- target accuracy
+### Single Perception
+
+- $\text{output}=f(w_1\times x_1+w_2\times x_2+\theta)$
+- Back propagation:
+    - $w_i=w_i+\eta(T-O)x_i$
+    - $\theta=\theta+\eta(T-O)(1)$
+
+This example trains the AND function. This problem is linearly separable.
+```python
+import numpy as np  # Import NumPy
+from sklearn.linear_model import Perceptron # Import Perceptron class from Scikit-Learn
+
+inputs = np.array([[0,0], [0,1], [1,0], [1,1]])  # Inputs
+outputs = np.array([0, 0, 0, 1])                 # Expected outputs
+
+# Create and fit a perceptron model
+# Set learning rate (eta0)
+model = Perceptron(eta0=0.2)
+model.fit(inputs, outputs)
+
+# Use the trained model to predict the outputs
+predicted_outputs = model.predict([[0,0], [1,0], [1,1], [0,1]])
+print(predicted_outputs) # Print the predicated outputs
+
+print(model.coef_)       # Print the final weights
+print(model.intercept_)  # Print the bias
+```
